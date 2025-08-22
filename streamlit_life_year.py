@@ -53,7 +53,7 @@ if st.button("計算流年"):
         year_title, challenge, action, stars, lucky_color, crystal = get_year_advice(main_number)
 
         st.markdown("### 📊 流年結果")
-        st.write(f"**流年組合數：** {total_sum} / {mid_sum} / {main_number}")
+        st.write(f"**本年流年數：** {main_number}")
         st.write(f"**主數流年主題：** {year_title}")
         st.write(f"**年度運勢指數：** {stars}")
         st.write(f"**可能挑戰：** {challenge}")
