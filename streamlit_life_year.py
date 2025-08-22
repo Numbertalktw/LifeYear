@@ -4,21 +4,28 @@ from datetime import date
 
 # ---------- 功能函數 ----------
 def sum_digits(n):
-    """將數字每位相加"""
-    return sum(int(d) for d in str(n))
+    """將數字每位相加直到剩下一位數"""
+    while n > 9:
+        n = sum(int(d) for d in str(n))
+    return n
 
 def calculate_life_number(year, month, day, query_year):
-    # 判斷查詢年份是否在生日之前
+    """
+    流年計算邏輯：
+    - 如果查詢年份的今天還沒到當年的生日，用前一年做基準
+    - 如果查詢年份已經過了生日，則用當年做基準
+    """
+    today = date.today()
     birthday_this_year = date(query_year, month, day)
-    today = date(query_year, 1, 1)  # 只比較當年1/1與生日
-    if birthday_this_year > today:
+
+    if today < birthday_this_year:
         base_year = query_year - 1
     else:
         base_year = query_year
 
-    # 流年總和
+    # 流年總和 = 基準年 + 出生月 + 出生日
     total_sum = base_year + month + day
-    mid_sum = sum_digits(total_sum)
+    mid_sum = sum(int(d) for d in str(total_sum))
     main_number = sum_digits(mid_sum)
 
     return total_sum, mid_sum, main_number
